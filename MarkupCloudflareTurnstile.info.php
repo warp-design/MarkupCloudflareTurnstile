@@ -2,9 +2,9 @@
 
 $info = [
 	'title' => 'Markup Cloudflare Turnstile',
-	'version' => 002,
+	'version' => 003,
 	'summary' => "Implement Turnstile, Cloudflare's CAPTCHA alternative.",
-	'author' => 'nbcommunication',
+	'author' => 'nbcommunication + contribution from @mrjcgoodwin/warp-design.co.uk',
 	'href' => 'https://github.com/nbcommunication/MarkupCloudflareTurnstile',
 	'singular' => false,
 	'autoload' => true,
