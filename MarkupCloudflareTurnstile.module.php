@@ -145,4 +145,19 @@ class MarkupCloudflareTurnstile extends WireData implements Module, Configurable
 			]
 		), true)['success'] ?? false;
 	}
+
+	/**
+	 * Verify the response
+	 *
+	 * @param string $token
+	 * @return bool
+	 *
+	 */
+	public function renderProtectedContent(string $filename) {
+
+		return $this->wire('files')->render('../modules/MarkupCloudflareTurnstile/views/protected_content_scripts.php',[
+			'filename' 	=> $filename
+		]);		
+
+	}
 }
