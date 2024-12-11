@@ -88,12 +88,13 @@ class MarkupCloudflareTurnstile extends WireData implements Module, Configurable
 	/**
 	 * Verify the response
 	 *
+	 * @param string $token
 	 * @return bool
 	 *
 	 */
-	public function verifyResponse() {
+	public function verifyResponse($token = null) {
 
-		$response = $this->wire('input')->post('cf-turnstile-response');
+		$response = ($token) ? $token : $this->wire('input')->post('cf-turnstile-response');
 		if(!$response) return false;
 
 		return json_decode($this->wire(new WireHttp())->post(
