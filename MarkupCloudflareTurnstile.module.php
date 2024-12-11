@@ -10,6 +10,42 @@
 
 class MarkupCloudflareTurnstile extends WireData implements Module, ConfigurableModule {
 
+	public function init() {
+
+		//Add URL hooks to catch Turnstile functionality from the front end
+		wire()->addHook('/turnstile/{route}', function($event) {
+		
+			switch ($event->arguments('route')) {
+
+				//Handle verification via ajax
+				case 'verify':
+		
+					if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+						header('Content-Type: application/json');
+					
+						$input = json_decode(file_get_contents('php://input'), true);
+						$token = $input['cf-turnstile-response'] ?? '';
+					
+						if (!$token) {
+							return json_encode(['success' => false, 'error' => 'Missing token']);
+							exit;
+						}
+
+						$response = $this->verifyResponse($token);
+					
+						if ($response) {
+							return json_encode(['success' => true]);
+						} else {
+							return json_encode(['success' => false]);
+						}
+					}
+					break;
+			}
+			
+		});
+
+	}
+
 	/**
 	 * Render
 	 *
