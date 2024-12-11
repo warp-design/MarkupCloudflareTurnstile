@@ -41,6 +41,17 @@ class MarkupCloudflareTurnstile extends WireData implements Module, Configurable
 						}
 					}
 					break;
+		
+				//Provide HTML render files back to front end once Turnstile $token is verified
+				case 'render':
+
+					if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+						$input = json_decode(file_get_contents('php://input'), true);
+						$filePath = $input['filePath'] ?? '';
+						$filePath = wire('sanitizer')->string($filePath);
+						return $this->wire()->files->render($filePath);
+					}
+					break;
 			}
 			
 		});
