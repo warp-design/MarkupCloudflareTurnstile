@@ -25,6 +25,7 @@ class MarkupCloudflareTurnstile extends WireData implements Module, Configurable
 					
 						$input = json_decode(file_get_contents('php://input'), true);
 						$token = $input['cf-turnstile-response'] ?? '';
+						$token = wire('sanitizer')->string($token);
 					
 						if (!$token) {
 							return json_encode(['success' => false, 'error' => 'Missing token']);
