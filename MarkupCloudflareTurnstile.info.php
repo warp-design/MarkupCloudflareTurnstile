@@ -7,7 +7,7 @@ $info = [
 	'author' => 'nbcommunication',
 	'href' => 'https://github.com/nbcommunication/MarkupCloudflareTurnstile',
 	'singular' => false,
-	'autoload' => false,
+	'autoload' => true,
 	'icon' => 'check-circle',
 	'requires' => 'PHP>=8.1',
 ];
