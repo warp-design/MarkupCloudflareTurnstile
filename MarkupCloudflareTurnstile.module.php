@@ -12,6 +12,8 @@ class MarkupCloudflareTurnstile extends WireData implements Module, Configurable
 
 	public function init() {
 
+
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') return;
 		//Add URL hooks to catch Turnstile functionality from the front end
 		wire()->addHook('/turnstile/{route}', function($event) {
 		
